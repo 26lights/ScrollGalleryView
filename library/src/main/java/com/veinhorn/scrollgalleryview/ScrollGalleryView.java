@@ -31,7 +31,7 @@ public class ScrollGalleryView extends LinearLayout {
     private FragmentManager fragmentManager;
     private Context context;
     private Point displayProps;
-    private PagerAdapter pagerAdapter;
+    private ScreenSlidePagerAdapter pagerAdapter;
     private List<MediaInfo> mListOfMedia;
 
     // Options
@@ -225,5 +225,10 @@ public class ScrollGalleryView extends LinearLayout {
             inSampleSize *= 2;
         }
         return inSampleSize;
+    }
+
+    public void removeItem(int position) {
+        thumbnailsContainer.removeViewAt(position);
+        pagerAdapter.removeItem(position);
     }
 }

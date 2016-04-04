@@ -46,4 +46,16 @@ public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return mListOfMedia.size();
     }
+
+    //this is called when notifyDataSetChanged() is called
+    @Override
+    public int getItemPosition(Object object) {
+        // refresh all fragments when data set changed
+        return POSITION_NONE;
+    }
+
+    protected void removeItem(int position) {
+        mListOfMedia.remove(position);
+        notifyDataSetChanged();
+    }
 }
