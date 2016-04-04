@@ -43,19 +43,24 @@ public class MainActivity extends FragmentActivity {
                 .addMedia(MediaInfo.mediaLoader(new DefaultImageLoader(R.drawable.wallpaper1)))
                 .addMedia(MediaInfo.mediaLoader(new DefaultImageLoader(toBitmap(R.drawable.wallpaper7))))
                 .addMedia(MediaInfo.mediaLoader(new MediaLoader() {
+                    @Override
+                    public Bitmap getBitmap() {
+                        return toBitmap(R.drawable.wallpaper3);
+                    }
+
                     @Override public boolean isImage() {
                         return true;
                     }
 
                     @Override public void loadMedia(Context context, ImageView imageView,
                                                     MediaLoader.SuccessCallback callback) {
-                        imageView.setImageBitmap(toBitmap(R.drawable.wallpaper3));
+                        imageView.setImageBitmap(getBitmap());
                         callback.onSuccess();
                     }
 
                     @Override public void loadThumbnail(Context context, ImageView thumbnailView,
                                                         MediaLoader.SuccessCallback callback) {
-                        thumbnailView.setImageBitmap(toBitmap(R.drawable.wallpaper3));
+                        thumbnailView.setImageBitmap(getBitmap());
                         callback.onSuccess();
                     }
                 }))

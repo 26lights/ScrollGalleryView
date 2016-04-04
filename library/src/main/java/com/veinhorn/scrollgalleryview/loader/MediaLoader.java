@@ -1,12 +1,15 @@
 package com.veinhorn.scrollgalleryview.loader;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 /**
  * Implementation may load image from some sources, such as remote url.
  */
 public interface MediaLoader {
+
+    Bitmap getBitmap();
 
     /**
      * @return true if implementation load's image, otherwise false
