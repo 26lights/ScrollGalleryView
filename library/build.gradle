@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
 
+version = "1.0.5"
+group = "com.veinhorn.scrollgalleryview"
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -7,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 10
         targetSdkVersion 23
-        versionCode 5
-        versionName "1.0.5"
+        versionCode 6
+        versionName version
     }
     buildTypes {
         release {
@@ -28,10 +31,7 @@ dependencies {
 }
 
 ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'scroll-gallery-view'
-
-    publishedGroupId = 'com.veinhorn.scrollgalleryview'
+    publishedGroupId = group
     libraryName = 'ScrollGalleryView'
     artifact = 'library'
 
@@ -40,7 +40,7 @@ ext {
     siteUrl = 'https://github.com/VEINHORN/ScrollGalleryView'
     gitUrl = 'https://github.com/VEINHORN/ScrollGalleryView.git'
 
-    libraryVersion = '1.0.5'
+    libraryVersion = version
 
     developerId = 'veinhorn'
     developerName = 'Boris Korogvich'
@@ -52,4 +52,19 @@ ext {
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+uploadArchives {
+    configuration = configurations.archives
+    repositories.mavenDeployer {
+        beforeDeployment { MavenDeployment deployment }
+
+        repository(url: properties.getProperty("sonatypeRepo")) {
+            authentication(userName: properties.getProperty("sonatypeUsername"),
+                    password: properties.getProperty("sonatypePassword"))
+        }
+
+   }
+}
