@@ -21,11 +21,6 @@ public class DefaultImageLoader implements MediaLoader {
     }
 
     @Override
-    public Bitmap getBitmap() {
-        return mBitmap;
-    }
-
-    @Override
     public boolean isImage() {
         return true;
     }
