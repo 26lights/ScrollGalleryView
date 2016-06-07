@@ -67,11 +67,14 @@ public class ImageFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        if (isViewPagerActive()) {
-            outState.putBoolean(Constants.IS_LOCKED, viewPager.isLocked());
+        BitmapDrawable drawable = ((BitmapDrawable) backgroundImage.getDrawable());
+        if(drawable != null) {
+            if (isViewPagerActive()) {
+                outState.putBoolean(Constants.IS_LOCKED, viewPager.isLocked());
+            }
+            outState.putParcelable(Constants.IMAGE, drawable.getBitmap());
+            outState.putBoolean(Constants.ZOOM, photoViewAttacher != null);
         }
-        outState.putParcelable(Constants.IMAGE, ((BitmapDrawable) backgroundImage.getDrawable()).getBitmap());
-        outState.putBoolean(Constants.ZOOM, photoViewAttacher != null);
         super.onSaveInstanceState(outState);
     }
 
